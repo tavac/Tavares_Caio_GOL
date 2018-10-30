@@ -32,7 +32,7 @@ namespace Tavares_Caio_GOL
 
 			// Setup the timer
 			timer.Enabled = false;
-			timer.Interval = 100; // milliseconds
+			timer.Interval = 50; // milliseconds
 			timer.Tick += Timer_Tick;
 
 			//timer.Enabled = true; // start timer running
@@ -50,15 +50,15 @@ namespace Tavares_Caio_GOL
 					{
 						scratch[x, y] = false;
 					}
-					if (countNeighbor(x, y) > 3) //rule 2
+					else if (countNeighbor(x, y) > 3) //rule 2
 					{
 						scratch[x, y] = false;
 					}
-					if (countNeighbor(x, y) <= 3 && countNeighbor(x, y) >= 2) //rule 3
+					else if ((universe[x, y] == true) && (countNeighbor(x, y) == 3 || countNeighbor(x, y) == 2)) //rule 3
 					{
 						scratch[x, y] = true;
 					}
-					if (universe[x, y] == false && countNeighbor(x, y) == 3) //rule 4
+					else if ((universe[x, y] == false) && countNeighbor(x, y) == 3) //rule 4
 					{
 						scratch[x, y] = true;
 					}
@@ -73,6 +73,13 @@ namespace Tavares_Caio_GOL
 			universe = scratch;
 			scratch = temp;
 
+			for (int X = 0; X < universe.GetLength(0); ++X)
+			{
+				for (int Y = 0; Y < universe.GetLength(1); ++Y)
+				{
+					scratch[X, Y] = false;
+				}
+			}
 			graphicsPanel1.Invalidate();
 
 			// Update status strip generations
@@ -170,58 +177,69 @@ namespace Tavares_Caio_GOL
 			int count = 0;
 			// get 'home' position, check for neighbors
 
-			if (cellOnBorder(x, y) == false)
+			for (int _x = x - 1; _x <= (x + 1); ++_x)
 			{
-				if (universe[x - 1, y - 1] == true) //top left
-					count++;
-				if (universe[x + 1, y + 1] == true) //bottom right
-					count++;
-				if (universe[x - 1, y] == true) //middle left
-					count++;
-				if (universe[x + 1, y] == true) //middle right
-					count++;
-				if (universe[x, y - 1] == true) //middle top
-					count++;
-				if (universe[x, y + 1] == true) //middle bottom
-					count++;
-				if (universe[x + 1, y - 1] == true) //top right
-					count++;
-				if (universe[x - 1, y + 1] == true) //bottom left
-					count++;
+				for (int _y = y - 1; _y <= (y + 1); ++_y)
+				{
+					// if it is out of bounds, continue
+					if (_x < 0 || _y < 0 || _x > universe.GetLength(0)-1 || _y > universe.GetLength(1)-1)
+						continue;
+					//if it is the 'home' cell, continue
+					else if (_x == x && _y == y)
+						continue;
+					if ((_x >= 0 && _y >= 0) && (x < universe.GetLength(0)-1 && _y < universe.GetLength(1)-1))
+					{
+						// if it is a live cell, add count
+						if (universe[_x, _y] == true)
+							++count;
+					}
+				}
 			}
-			else
-			{
-
-			}
-			
 			return count;
-		}
-
-		private bool cellOnBorder(int x, int y)
-		{
-			
-			if (x == universe.GetLength(0) - 1)
-			{
-				return true;
-			}
-			if (y == universe.GetLength(1) - 1)
-			{
-				return true;
-			}
-			if (x == 0)
-			{
-				return true;
-			}
-			if (y == 0)
-			{
-				return true;
-			}
-			return false;
 		}
 
 		private void PlayButton_Click(object sender, EventArgs e)
 		{
 			timer.Enabled = !timer.Enabled;
+		}
+
+		private void NextGenButton_Click(object sender, EventArgs e)
+		{
+			NextGeneration();
+		}
+
+		private void newToolStripButton_Click(object sender, EventArgs e)
+		{
+			for (int x = 0; x < universe.GetLength(0); ++x)
+			{
+				for (int y = 0; y < universe.GetLength(1); ++y)
+				{
+					universe[x, y] = false;
+					scratch[x, y] = false;
+				}
+			}
+			graphicsPanel1.Invalidate();
+			timer.Enabled = false;
+			generations = 0;
+			toolStripStatusLabelGenerations.Text = "Generations = " + generations;
+		}
+
+		private void RandomButton_Click(object sender, EventArgs e)
+		{
+			Random rnd = new Random();
+			for (int x = 0; x < universe.GetLength(0); ++x)
+			{
+				for (int y = 0; y < universe.GetLength(1); ++y)
+				{
+					rnd.Next();
+					int z = rnd.Next(0, 2);
+					if (z == 0)
+						universe[x, y] = true;
+					else
+						universe[x, y] = false;
+				}
+			}
+			graphicsPanel1.Invalidate();
 		}
 	}
 }
