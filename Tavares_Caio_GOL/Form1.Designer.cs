@@ -49,12 +49,13 @@
 			this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-			this.PlayButton = new System.Windows.Forms.ToolStripButton();
 			this.NextGenButton = new System.Windows.Forms.ToolStripButton();
+			this.RandomButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
+			this.cellColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.graphicsPanel1 = new Tavares_Caio_GOL.GraphicsPanel();
-			this.RandomButton = new System.Windows.Forms.ToolStripButton();
+			this.PlayButton = new System.Windows.Forms.ToolStripButton();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
@@ -67,7 +68,7 @@
             this.toolsToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(573, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(708, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -171,6 +172,8 @@
 			// 
 			// customizeToolStripMenuItem
 			// 
+			this.customizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cellColorToolStripMenuItem});
 			this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
 			this.customizeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
 			this.customizeToolStripMenuItem.Text = "&Customize";
@@ -183,6 +186,7 @@
 			// 
 			// toolStrip1
 			// 
+			this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripButton,
             this.openToolStripButton,
@@ -193,7 +197,7 @@
             this.RandomButton});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
 			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(573, 25);
+			this.toolStrip1.Size = new System.Drawing.Size(708, 27);
 			this.toolStrip1.TabIndex = 1;
 			this.toolStrip1.Text = "toolStrip1";
 			// 
@@ -203,7 +207,7 @@
 			this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
 			this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.newToolStripButton.Name = "newToolStripButton";
-			this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
+			this.newToolStripButton.Size = new System.Drawing.Size(24, 24);
 			this.newToolStripButton.Text = "&New";
 			this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
 			// 
@@ -213,7 +217,7 @@
 			this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
 			this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.openToolStripButton.Name = "openToolStripButton";
-			this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
+			this.openToolStripButton.Size = new System.Drawing.Size(24, 24);
 			this.openToolStripButton.Text = "&Open";
 			// 
 			// saveToolStripButton
@@ -222,42 +226,41 @@
 			this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
 			this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.saveToolStripButton.Name = "saveToolStripButton";
-			this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
+			this.saveToolStripButton.Size = new System.Drawing.Size(24, 24);
 			this.saveToolStripButton.Text = "&Save";
 			// 
 			// toolStripSeparator6
 			// 
 			this.toolStripSeparator6.Name = "toolStripSeparator6";
-			this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-			// 
-			// PlayButton
-			// 
-			this.PlayButton.CheckOnClick = true;
-			this.PlayButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.PlayButton.Image = ((System.Drawing.Image)(resources.GetObject("PlayButton.Image")));
-			this.PlayButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.PlayButton.Name = "PlayButton";
-			this.PlayButton.Size = new System.Drawing.Size(23, 22);
-			this.PlayButton.Text = "PlayButton";
-			this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+			this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
 			// 
 			// NextGenButton
 			// 
-			this.NextGenButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.NextGenButton.Image = ((System.Drawing.Image)(resources.GetObject("NextGenButton.Image")));
+			this.NextGenButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.NextGenButton.Image = global::Tavares_Caio_GOL.Properties.Resources.Next_Button;
 			this.NextGenButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.NextGenButton.Name = "NextGenButton";
-			this.NextGenButton.Size = new System.Drawing.Size(23, 22);
-			this.NextGenButton.Text = "Next Gen";
+			this.NextGenButton.Size = new System.Drawing.Size(56, 24);
+			this.NextGenButton.Text = "&NextGen";
 			this.NextGenButton.Click += new System.EventHandler(this.NextGenButton_Click);
+			// 
+			// RandomButton
+			// 
+			this.RandomButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.RandomButton.Image = ((System.Drawing.Image)(resources.GetObject("RandomButton.Image")));
+			this.RandomButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RandomButton.Name = "RandomButton";
+			this.RandomButton.Size = new System.Drawing.Size(56, 24);
+			this.RandomButton.Text = "&Random";
+			this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
 			// 
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelGenerations});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 323);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 392);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(573, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(708, 22);
 			this.statusStrip1.TabIndex = 2;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -267,32 +270,38 @@
 			this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
 			this.toolStripStatusLabelGenerations.Text = "Generations = 0";
 			// 
+			// cellColorToolStripMenuItem
+			// 
+			this.cellColorToolStripMenuItem.Name = "cellColorToolStripMenuItem";
+			this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+			this.cellColorToolStripMenuItem.Text = "Cell Color";
+			// 
 			// graphicsPanel1
 			// 
 			this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
 			this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.graphicsPanel1.Location = new System.Drawing.Point(0, 49);
+			this.graphicsPanel1.Location = new System.Drawing.Point(0, 51);
 			this.graphicsPanel1.Name = "graphicsPanel1";
-			this.graphicsPanel1.Size = new System.Drawing.Size(573, 274);
+			this.graphicsPanel1.Size = new System.Drawing.Size(708, 341);
 			this.graphicsPanel1.TabIndex = 3;
 			this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
 			this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
 			// 
-			// RandomButton
+			// PlayButton
 			// 
-			this.RandomButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.RandomButton.Image = ((System.Drawing.Image)(resources.GetObject("RandomButton.Image")));
-			this.RandomButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.RandomButton.Name = "RandomButton";
-			this.RandomButton.Size = new System.Drawing.Size(23, 22);
-			this.RandomButton.Text = "&Random";
-			this.RandomButton.Click += new System.EventHandler(this.RandomButton_Click);
+			this.PlayButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.PlayButton.Image = global::Tavares_Caio_GOL.Properties.Resources.Play_Button;
+			this.PlayButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.PlayButton.Name = "PlayButton";
+			this.PlayButton.Size = new System.Drawing.Size(69, 24);
+			this.PlayButton.Text = "&PlayButton";
+			this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(573, 345);
+			this.ClientSize = new System.Drawing.Size(708, 414);
 			this.Controls.Add(this.graphicsPanel1);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.toolStrip1);
@@ -336,9 +345,10 @@
 		private System.Windows.Forms.ToolStripButton saveToolStripButton;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelGenerations;
-		private System.Windows.Forms.ToolStripButton PlayButton;
 		private System.Windows.Forms.ToolStripButton NextGenButton;
 		private System.Windows.Forms.ToolStripButton RandomButton;
+		private System.Windows.Forms.ToolStripMenuItem cellColorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripButton PlayButton;
 	}
 }
 
