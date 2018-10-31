@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,22 +44,26 @@
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.cellColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+			this.PlayButton = new System.Windows.Forms.ToolStripButton();
 			this.NextGenButton = new System.Windows.Forms.ToolStripButton();
 			this.RandomButton = new System.Windows.Forms.ToolStripButton();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
-			this.cellColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.graphicsPanel1 = new Tavares_Caio_GOL.GraphicsPanel();
-			this.PlayButton = new System.Windows.Forms.ToolStripButton();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.modalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
+			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -68,7 +73,7 @@
             this.toolsToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(708, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(1073, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -178,6 +183,12 @@
 			this.customizeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
 			this.customizeToolStripMenuItem.Text = "&Customize";
 			// 
+			// cellColorToolStripMenuItem
+			// 
+			this.cellColorToolStripMenuItem.Name = "cellColorToolStripMenuItem";
+			this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+			this.cellColorToolStripMenuItem.Text = "Cell Color";
+			// 
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
@@ -197,7 +208,7 @@
             this.RandomButton});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
 			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(708, 27);
+			this.toolStrip1.Size = new System.Drawing.Size(1073, 27);
 			this.toolStrip1.TabIndex = 1;
 			this.toolStrip1.Text = "toolStrip1";
 			// 
@@ -234,6 +245,16 @@
 			this.toolStripSeparator6.Name = "toolStripSeparator6";
 			this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
 			// 
+			// PlayButton
+			// 
+			this.PlayButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.PlayButton.Image = global::Tavares_Caio_GOL.Properties.Resources.Play_Button;
+			this.PlayButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.PlayButton.Name = "PlayButton";
+			this.PlayButton.Size = new System.Drawing.Size(69, 24);
+			this.PlayButton.Text = "&PlayButton";
+			this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+			// 
 			// NextGenButton
 			// 
 			this.NextGenButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -258,9 +279,9 @@
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelGenerations});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 392);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 657);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(708, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(1073, 22);
 			this.statusStrip1.TabIndex = 2;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -270,38 +291,46 @@
 			this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
 			this.toolStripStatusLabelGenerations.Text = "Generations = 0";
 			// 
-			// cellColorToolStripMenuItem
-			// 
-			this.cellColorToolStripMenuItem.Name = "cellColorToolStripMenuItem";
-			this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-			this.cellColorToolStripMenuItem.Text = "Cell Color";
-			// 
 			// graphicsPanel1
 			// 
 			this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
+			this.graphicsPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.graphicsPanel1.ContextMenuStrip = this.contextMenuStrip1;
 			this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.graphicsPanel1.Location = new System.Drawing.Point(0, 51);
 			this.graphicsPanel1.Name = "graphicsPanel1";
-			this.graphicsPanel1.Size = new System.Drawing.Size(708, 341);
+			this.graphicsPanel1.Size = new System.Drawing.Size(1073, 606);
 			this.graphicsPanel1.TabIndex = 3;
 			this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
 			this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
 			// 
-			// PlayButton
+			// contextMenuStrip1
 			// 
-			this.PlayButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.PlayButton.Image = global::Tavares_Caio_GOL.Properties.Resources.Play_Button;
-			this.PlayButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.PlayButton.Name = "PlayButton";
-			this.PlayButton.Size = new System.Drawing.Size(69, 24);
-			this.PlayButton.Text = "&PlayButton";
-			this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.colorToolStripMenuItem,
+            this.modalToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(109, 48);
+			// 
+			// colorToolStripMenuItem
+			// 
+			this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
+			this.colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.colorToolStripMenuItem.Text = "Color";
+			this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
+			// 
+			// modalToolStripMenuItem
+			// 
+			this.modalToolStripMenuItem.Name = "modalToolStripMenuItem";
+			this.modalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.modalToolStripMenuItem.Text = "Modal";
+			this.modalToolStripMenuItem.Click += new System.EventHandler(this.modalToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(708, 414);
+			this.ClientSize = new System.Drawing.Size(1073, 679);
 			this.Controls.Add(this.graphicsPanel1);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.toolStrip1);
@@ -315,6 +344,7 @@
 			this.toolStrip1.PerformLayout();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
+			this.contextMenuStrip1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -349,6 +379,9 @@
 		private System.Windows.Forms.ToolStripButton RandomButton;
 		private System.Windows.Forms.ToolStripMenuItem cellColorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripButton PlayButton;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem modalToolStripMenuItem;
 	}
 }
 

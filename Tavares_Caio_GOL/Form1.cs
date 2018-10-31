@@ -13,8 +13,11 @@ namespace Tavares_Caio_GOL
 	public partial class Form1 : Form
 	{
 		// The universe array
-		bool[,] universe = new bool[20, 20];
-		bool[,] scratch = new bool[20, 20];
+		bool[,] universe = new bool[75, 75];
+		bool[,] scratch = new bool[75, 75];
+
+		//modal dialog data
+		decimal NumericUpDownSeed = 0;
 
 		// Drawing colors
 		Color gridColor = Color.Black;
@@ -240,6 +243,28 @@ namespace Tavares_Caio_GOL
 				}
 			}
 			graphicsPanel1.Invalidate();
+		}
+
+		private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ColorDialog dlg = new ColorDialog();
+			dlg.Color = graphicsPanel1.BackColor;
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				graphicsPanel1.BackColor = dlg.Color;
+			}
+		}
+
+		private void modalToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ModalDialog mD = new ModalDialog();
+
+			mD.Seed = NumericUpDownSeed;
+
+			if (DialogResult.OK == mD.ShowDialog())
+			{
+				NumericUpDownSeed = mD.Seed;
+			}
 		}
 	}
 }
