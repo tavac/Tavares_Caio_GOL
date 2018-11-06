@@ -90,6 +90,7 @@ namespace Tavares_Caio_GOL
 
 			// Update status strip generations
 			toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+			LivingCellCounter.Text = "Living Cells = " + (CellCounter()).ToString();
 		}
 
 		// The event called by the timer every Interval milliseconds.
@@ -157,6 +158,7 @@ namespace Tavares_Caio_GOL
 
 		private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
 		{
+			
 			// If the left mouse button was clicked
 			if (e.Button == MouseButtons.Left)
 			{
@@ -172,6 +174,8 @@ namespace Tavares_Caio_GOL
 
 				// Toggle the cell's state
 				universe[x, y] = !universe[x, y];
+
+				LivingCellCounter.Text = "Living Cells = " + (CellCounter()).ToString();
 
 				// Tell Windows you need to repaint
 				graphicsPanel1.Invalidate();
@@ -228,6 +232,7 @@ namespace Tavares_Caio_GOL
 			timer.Enabled = false;
 			generations = 0;
 			toolStripStatusLabelGenerations.Text = "Generations = " + generations;
+			LivingCellCounter.Text = "Living Cells = " + (CellCounter()).ToString();
 		}
 
 		private void RandomButton_Click(object sender, EventArgs e)
@@ -245,6 +250,7 @@ namespace Tavares_Caio_GOL
 						universe[x, y] = false;
 				}
 			}
+			LivingCellCounter.Text = "Living Cells = " + (CellCounter()).ToString();
 			graphicsPanel1.Invalidate();
 		}
 
@@ -453,8 +459,25 @@ namespace Tavares_Caio_GOL
 
 				// Close the file.
 				reader.Close();
+
+				toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+				LivingCellCounter.Text = "Living Cells = " + (CellCounter()).ToString();
 				graphicsPanel1.Invalidate();
 			}
+		}
+
+		private int CellCounter()
+		{
+			int LivingCells = 0;
+			for (int x = 0; x < universe.GetLength(0); ++x)
+			{
+				for (int y = 0; y < universe.GetLength(1); ++y)
+				{
+					if (universe[x, y] == true)
+						LivingCells++;
+				}
+			}
+			return LivingCells;
 		}
 	}
 }
