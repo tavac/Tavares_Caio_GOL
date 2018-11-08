@@ -494,5 +494,16 @@ namespace Tavares_Caio_GOL
 				RandomButton_Click(sender, e);
 			}
 		}
+
+		private void timerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			TimerDialog tD = new TimerDialog();
+
+			if (DialogResult.OK == tD.ShowDialog())
+			{
+				
+			}
+
+		}
 	}
 }

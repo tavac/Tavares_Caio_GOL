@@ -33,5 +33,10 @@ namespace Tavares_Caio_GOL
 				numericUpDownSeed.Value = value;
 			}
 		}
+
+		private void numericUpDownSeed_ValueChanged(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

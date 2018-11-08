@@ -66,6 +66,7 @@
 			this.numericUpDownSeed.Name = "numericUpDownSeed";
 			this.numericUpDownSeed.Size = new System.Drawing.Size(75, 20);
 			this.numericUpDownSeed.TabIndex = 2;
+			this.numericUpDownSeed.ValueChanged += new System.EventHandler(this.numericUpDownSeed_ValueChanged);
 			// 
 			// labelSeed
 			// 
