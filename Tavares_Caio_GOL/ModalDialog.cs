@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Tavares_Caio_GOL
 {
-	public partial class ModalDialog : Form
+	public partial class SeedDialog : Form
 	{
-		public ModalDialog()
+		public SeedDialog()
 		{
 			InitializeComponent();
 		}

@@ -1,6 +1,6 @@
 ﻿namespace Tavares_Caio_GOL
 {
-	partial class ModalDialog
+	partial class SeedDialog
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -38,7 +38,7 @@
 			// OKbutton
 			// 
 			this.OKbutton.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.OKbutton.Location = new System.Drawing.Point(12, 172);
+			this.OKbutton.Location = new System.Drawing.Point(12, 74);
 			this.OKbutton.Name = "OKbutton";
 			this.OKbutton.Size = new System.Drawing.Size(75, 23);
 			this.OKbutton.TabIndex = 0;
@@ -48,7 +48,7 @@
 			// CancelButton
 			// 
 			this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.CancelButton.Location = new System.Drawing.Point(100, 172);
+			this.CancelButton.Location = new System.Drawing.Point(100, 74);
 			this.CancelButton.Name = "CancelButton";
 			this.CancelButton.Size = new System.Drawing.Size(75, 23);
 			this.CancelButton.TabIndex = 1;
@@ -57,32 +57,31 @@
 			// 
 			// numericUpDownSeed
 			// 
-			this.numericUpDownSeed.Location = new System.Drawing.Point(100, 35);
+			this.numericUpDownSeed.Location = new System.Drawing.Point(95, 23);
 			this.numericUpDownSeed.Maximum = new decimal(new int[] {
             9999,
             0,
             0,
             0});
 			this.numericUpDownSeed.Name = "numericUpDownSeed";
-			this.numericUpDownSeed.ReadOnly = true;
 			this.numericUpDownSeed.Size = new System.Drawing.Size(75, 20);
 			this.numericUpDownSeed.TabIndex = 2;
 			// 
 			// labelSeed
 			// 
 			this.labelSeed.AutoSize = true;
-			this.labelSeed.Location = new System.Drawing.Point(33, 39);
+			this.labelSeed.Location = new System.Drawing.Point(28, 27);
 			this.labelSeed.Name = "labelSeed";
 			this.labelSeed.Size = new System.Drawing.Size(32, 13);
 			this.labelSeed.TabIndex = 3;
 			this.labelSeed.Text = "Seed";
 			// 
-			// ModalDialog
+			// SeedDialog
 			// 
 			this.AcceptButton = this.OKbutton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(187, 207);
+			this.ClientSize = new System.Drawing.Size(187, 113);
 			this.Controls.Add(this.labelSeed);
 			this.Controls.Add(this.numericUpDownSeed);
 			this.Controls.Add(this.CancelButton);
@@ -90,9 +89,9 @@
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "ModalDialog";
+			this.Name = "SeedDialog";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "ModalDialog";
+			this.Text = "Seed Dialog";
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeed)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

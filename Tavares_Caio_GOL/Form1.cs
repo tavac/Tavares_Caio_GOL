@@ -30,6 +30,9 @@ namespace Tavares_Caio_GOL
 		// Generation count
 		int generations = 0;
 
+		// timer tick by milisecs
+		int timerTickInput = 50;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -38,7 +41,7 @@ namespace Tavares_Caio_GOL
 
 			// Setup the timer
 			timer.Enabled = false;
-			timer.Interval = 50; // milliseconds
+			timer.Interval = timerTickInput; // milliseconds
 			timer.Tick += Timer_Tick;
 
 			//timer.Enabled = true; // start timer running
@@ -237,17 +240,38 @@ namespace Tavares_Caio_GOL
 
 		private void RandomButton_Click(object sender, EventArgs e)
 		{
-			Random rnd = new Random();
-			for (int x = 0; x < universe.GetLength(0); ++x)
+			Random rnd;
+
+			if (NumericUpDownSeed > 0)
 			{
-				for (int y = 0; y < universe.GetLength(1); ++y)
+				rnd = new Random((int)NumericUpDownSeed);
+				for (int x = 0; x < universe.GetLength(0); ++x)
 				{
-					rnd.Next();
-					int z = rnd.Next(0, 2);
-					if (z == 0)
-						universe[x, y] = true;
-					else
-						universe[x, y] = false;
+					for (int y = 0; y < universe.GetLength(1); ++y)
+					{
+						rnd.Next();
+						int z = rnd.Next(0, 2);
+						if (z == 0)
+							universe[x, y] = true;
+						else
+							universe[x, y] = false;
+					}
+				}
+			}
+			else
+			{
+				rnd = new Random();
+				for (int x = 0; x < universe.GetLength(0); ++x)
+				{
+					for (int y = 0; y < universe.GetLength(1); ++y)
+					{
+						rnd.Next();
+						int z = rnd.Next(0, 2);
+						if (z == 0)
+							universe[x, y] = true;
+						else
+							universe[x, y] = false;
+					}
 				}
 			}
 			LivingCellCounter.Text = "Living Cells = " + (CellCounter()).ToString();
@@ -261,18 +285,6 @@ namespace Tavares_Caio_GOL
 			if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				graphicsPanel1.BackColor = dlg.Color;
-			}
-		}
-
-		private void modalToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ModalDialog mD = new ModalDialog();
-
-			mD.Seed = NumericUpDownSeed;
-
-			if (DialogResult.OK == mD.ShowDialog())
-			{
-				NumericUpDownSeed = mD.Seed;
 			}
 		}
 
@@ -328,16 +340,6 @@ namespace Tavares_Caio_GOL
 
 				// After all rows and columns have been written then close the file.
 				writer.Close();
-			}
-		}
-
-		private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ColorDialog dlg = new ColorDialog();
-
-			if (dlg.ShowDialog() == DialogResult.OK)
-			{
-				graphicsPanel1.BackColor = dlg.Color;
 			}
 		}
 
@@ -478,6 +480,19 @@ namespace Tavares_Caio_GOL
 				}
 			}
 			return LivingCells;
+		}
+
+		private void seedToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SeedDialog mD = new SeedDialog();
+
+			mD.Seed = NumericUpDownSeed;
+
+			if (DialogResult.OK == mD.ShowDialog())
+			{
+				NumericUpDownSeed = mD.Seed;
+				RandomButton_Click(sender, e);
+			}
 		}
 	}
 }
