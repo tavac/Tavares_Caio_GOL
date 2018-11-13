@@ -59,6 +59,11 @@
 			// 
 			this.TimerNumericUpDown1.AccessibleName = "TimerNumericUpDown1";
 			this.TimerNumericUpDown1.Location = new System.Drawing.Point(48, 65);
+			this.TimerNumericUpDown1.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
 			this.TimerNumericUpDown1.Name = "TimerNumericUpDown1";
 			this.TimerNumericUpDown1.Size = new System.Drawing.Size(94, 20);
 			this.TimerNumericUpDown1.TabIndex = 2;

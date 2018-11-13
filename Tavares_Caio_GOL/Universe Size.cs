@@ -10,26 +10,31 @@ using System.Windows.Forms;
 
 namespace Tavares_Caio_GOL
 {
-	public partial class TimerDialog : Form
+	public partial class Universe_Size : Form
 	{
-		public TimerDialog()
+		public Universe_Size()
 		{
 			InitializeComponent();
 		}
 
-		public decimal Timer
+		public string US_Box
 		{
 			get
 			{
-				return TimerNumericUpDown1.Value;
+				return UniverseSizeBox.Text;
 			}
 			set
 			{
-				TimerNumericUpDown1.Value = value;
+				UniverseSizeBox.Text = value;
 			}
 		}
 
-		private void TimerNumericUpDown1_ValueChanged(object sender, EventArgs e)
+		private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+		{
+
+		}
+
+		private void toolTip1_Popup(object sender, PopupEventArgs e)
 		{
 
 		}

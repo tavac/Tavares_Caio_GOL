@@ -30,9 +30,6 @@ namespace Tavares_Caio_GOL
 		// Generation count
 		int generations = 0;
 
-		// timer tick by milisecs
-		int timerTickInput = 50;
-
 		public Form1()
 		{
 			InitializeComponent();
@@ -41,7 +38,7 @@ namespace Tavares_Caio_GOL
 
 			// Setup the timer
 			timer.Enabled = false;
-			timer.Interval = timerTickInput; // milliseconds
+			timer.Interval = 200; // milliseconds
 			timer.Tick += Timer_Tick;
 
 			//timer.Enabled = true; // start timer running
@@ -153,6 +150,19 @@ namespace Tavares_Caio_GOL
 					e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
 				}
 			}
+
+			string HUD_Text = "\tGenerations = " + generations + "\n" + "\tLiving Cells = " + (CellCounter()).ToString() + "\n" + "\tBoundary Type = finite\n" + "\tUniverse Size = " + (universe.GetLength(0)) + ", " + (universe.GetLength(1));
+			Rectangle HUDRect = Rectangle.Empty;
+			HUDRect.X = 5;
+			HUDRect.Y = 5;
+			HUDRect.Width = 200;
+			HUDRect.Height = 100;
+			
+			Font f = new Font("Arial", 12f, FontStyle.Bold);
+			StringFormat SF = new StringFormat();
+			SF.Alignment = StringAlignment.Center;
+			SF.LineAlignment = StringAlignment.Center;
+			e.Graphics.DrawString(HUD_Text, f, Brushes.Red, HUDRect, SF);
 
 			// Cleaning up pens and brushes
 			gridPen.Dispose();
@@ -501,9 +511,46 @@ namespace Tavares_Caio_GOL
 
 			if (DialogResult.OK == tD.ShowDialog())
 			{
-				
+				timer.Interval = (int)tD.Timer;
 			}
 
 		}
+
+		private void universeSizeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Universe_Size uS = new Universe_Size();
+
+			if (DialogResult.OK == uS.ShowDialog())
+			{
+				int u_X;
+				int u_Y;
+				string[] temp = uS.US_Box.Split(',');
+				u_X = int.Parse(temp[0]);
+				u_Y = int.Parse(temp[1]);
+
+				universe = new bool[u_X, u_Y];
+				scratch = new bool[u_X, u_Y];
+				graphicsPanel1.Invalidate();
+			}
+		}
+
+		private void StatusStripView_Click(object sender, EventArgs e)
+		{
+			statusStrip1.Visible = !statusStrip1.Visible;
+		}
+
+		private void toolStripButton1_Click(object sender, EventArgs e)
+		{
+			//HUD.Visible = !HUD.Visible;
+		}
+
+		//private void HUD_VisibleChanged(object sender, EventArgs e)
+		//{
+		//	HUD.Text = "Generations = " + generations + "\n" + "Living Cells = " + (CellCounter()).ToString() + "\n" + "Boundary Type = " + "Torodial\n" + "Universe Size = " + (universe.GetLength(0)) + ", " + (universe.GetLength(1));
+			
+		//	HUD.ForeColor = Color.Red;
+		//}
+
+
 	}
 }
