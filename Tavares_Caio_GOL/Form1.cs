@@ -32,6 +32,7 @@ namespace Tavares_Caio_GOL
 
 		bool showHUD = false;
 		bool InfiniteUniverse = true; // false = FINITE, true = toroidal
+		bool showNeighborCount = true;
 		
 		public Form1()
 		{
@@ -131,15 +132,18 @@ namespace Tavares_Caio_GOL
 
 
 					// finds which cells to draw on
-					int neighbors = countNeighbor(x, y);
-					if (neighbors > 0)
+					if (showNeighborCount == true)
 					{
-						Font font = new Font("Arial", 8f);
+						int neighbors = countNeighbor(x, y);
+						if (neighbors > 0)
+						{
+							Font font = new Font("Arial", 8f);
 
-						StringFormat stringFormat = new StringFormat();
-						stringFormat.Alignment = StringAlignment.Center;
-						stringFormat.LineAlignment = StringAlignment.Center;
-						e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
+							StringFormat stringFormat = new StringFormat();
+							stringFormat.Alignment = StringAlignment.Center;
+							stringFormat.LineAlignment = StringAlignment.Center;
+							e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
+						}
 					}
 
 
@@ -665,6 +669,17 @@ namespace Tavares_Caio_GOL
 		{
 			InfiniteUniverse = true;
 			UniverseType_StatusLabel.Text = "Universe Type = Toroidal";
+		}
+
+		private void ShowNeighborButton_Click(object sender, EventArgs e)
+		{
+			showNeighborCount = !showNeighborCount;
+			graphicsPanel1.Invalidate();
+		}
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

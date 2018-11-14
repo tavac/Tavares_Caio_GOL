@@ -35,7 +35,6 @@
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +69,8 @@
 			this.finiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toroidalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.UniverseType_StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.ShowNeighborButton = new System.Windows.Forms.ToolStripButton();
+			this.cellColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
@@ -93,7 +94,6 @@
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
             this.toolStripSeparator,
-            this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
@@ -107,7 +107,7 @@
 			this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
 			this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
 			this.newToolStripMenuItem.Text = "&New";
 			this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripButton_Click);
 			// 
@@ -126,19 +126,12 @@
 			this.toolStripSeparator.Name = "toolStripSeparator";
 			this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
 			// 
-			// saveToolStripMenuItem
-			// 
-			this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
-			this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-			this.saveToolStripMenuItem.Text = "&Save";
-			// 
 			// saveAsToolStripMenuItem
 			// 
 			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+			this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
 			this.saveAsToolStripMenuItem.Text = "Save &As";
 			this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
 			// 
@@ -174,7 +167,7 @@
             this.timerToolStripMenuItem,
             this.universeSizeToolStripMenuItem});
 			this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-			this.customizeToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+			this.customizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.customizeToolStripMenuItem.Text = "&Customize";
 			// 
 			// cellColorToolStripMenuItem
@@ -187,8 +180,9 @@
 			// backgroundColorToolStripMenuItem
 			// 
 			this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.backgroundColorToolStripMenuItem.Text = "Background Color";
+			this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
 			// 
 			// seedToolStripMenuItem
 			// 
@@ -258,9 +252,10 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.colorToolStripMenuItem});
+            this.colorToolStripMenuItem,
+            this.cellColorToolStripMenuItem1});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(171, 26);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(171, 48);
 			// 
 			// colorToolStripMenuItem
 			// 
@@ -287,6 +282,7 @@
 			this.openToolStripButton.Name = "openToolStripButton";
 			this.openToolStripButton.Size = new System.Drawing.Size(24, 24);
 			this.openToolStripButton.Text = "&Open";
+			this.openToolStripButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
 			// saveToolStripButton
 			// 
@@ -296,6 +292,7 @@
 			this.saveToolStripButton.Name = "saveToolStripButton";
 			this.saveToolStripButton.Size = new System.Drawing.Size(24, 24);
 			this.saveToolStripButton.Text = "&Save";
+			this.saveToolStripButton.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator6
 			// 
@@ -344,7 +341,8 @@
             this.toolStripSeparator2,
             this.StatusStripView,
             this.viewHUDbutton,
-            this.UniverseType});
+            this.UniverseType,
+            this.ShowNeighborButton});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(1073, 27);
@@ -421,6 +419,23 @@
 			this.UniverseType_StatusLabel.Size = new System.Drawing.Size(123, 17);
 			this.UniverseType_StatusLabel.Text = "Universe Type = Finite";
 			// 
+			// ShowNeighborButton
+			// 
+			this.ShowNeighborButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.ShowNeighborButton.Image = ((System.Drawing.Image)(resources.GetObject("ShowNeighborButton.Image")));
+			this.ShowNeighborButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ShowNeighborButton.Name = "ShowNeighborButton";
+			this.ShowNeighborButton.Size = new System.Drawing.Size(93, 24);
+			this.ShowNeighborButton.Text = "Show Neighbor";
+			this.ShowNeighborButton.Click += new System.EventHandler(this.ShowNeighborButton_Click);
+			// 
+			// cellColorToolStripMenuItem1
+			// 
+			this.cellColorToolStripMenuItem1.Name = "cellColorToolStripMenuItem1";
+			this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.cellColorToolStripMenuItem1.Text = "Cell Color";
+			this.cellColorToolStripMenuItem1.Click += new System.EventHandler(this.cellColorToolStripMenuItem_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -456,7 +471,6 @@
 		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -489,6 +503,8 @@
 		private System.Windows.Forms.ToolStripMenuItem finiteToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toroidalToolStripMenuItem;
 		private System.Windows.Forms.ToolStripStatusLabel UniverseType_StatusLabel;
+		private System.Windows.Forms.ToolStripButton ShowNeighborButton;
+		private System.Windows.Forms.ToolStripMenuItem cellColorToolStripMenuItem1;
 	}
 }
 
