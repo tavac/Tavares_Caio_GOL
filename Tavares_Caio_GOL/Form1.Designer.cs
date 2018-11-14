@@ -64,8 +64,12 @@
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.StatusStripView = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+			this.viewHUDbutton = new System.Windows.Forms.ToolStripButton();
 			this.graphicsPanel1 = new Tavares_Caio_GOL.GraphicsPanel();
+			this.UniverseType = new System.Windows.Forms.ToolStripSplitButton();
+			this.finiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toroidalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.UniverseType_StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.menuStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
@@ -231,7 +235,8 @@
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelGenerations,
-            this.LivingCellCounter});
+            this.LivingCellCounter,
+            this.UniverseType_StatusLabel});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 657);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(1073, 22);
@@ -338,7 +343,8 @@
             this.RandomButton,
             this.toolStripSeparator2,
             this.StatusStripView,
-            this.toolStripButton1});
+            this.viewHUDbutton,
+            this.UniverseType});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(1073, 27);
@@ -360,15 +366,15 @@
 			this.StatusStripView.Text = "View Status Strip";
 			this.StatusStripView.Click += new System.EventHandler(this.StatusStripView_Click);
 			// 
-			// toolStripButton1
+			// viewHUDbutton
 			// 
-			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(64, 24);
-			this.toolStripButton1.Text = "View HUD";
-			this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+			this.viewHUDbutton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.viewHUDbutton.Image = ((System.Drawing.Image)(resources.GetObject("viewHUDbutton.Image")));
+			this.viewHUDbutton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.viewHUDbutton.Name = "viewHUDbutton";
+			this.viewHUDbutton.Size = new System.Drawing.Size(64, 24);
+			this.viewHUDbutton.Text = "View HUD";
+			this.viewHUDbutton.Click += new System.EventHandler(this.toolStripButton1_Click);
 			// 
 			// graphicsPanel1
 			// 
@@ -382,6 +388,38 @@
 			this.graphicsPanel1.TabIndex = 3;
 			this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
 			this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
+			// 
+			// UniverseType
+			// 
+			this.UniverseType.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.UniverseType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.finiteToolStripMenuItem,
+            this.toroidalToolStripMenuItem});
+			this.UniverseType.Image = ((System.Drawing.Image)(resources.GetObject("UniverseType.Image")));
+			this.UniverseType.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.UniverseType.Name = "UniverseType";
+			this.UniverseType.Size = new System.Drawing.Size(96, 24);
+			this.UniverseType.Text = "Universe Type";
+			// 
+			// finiteToolStripMenuItem
+			// 
+			this.finiteToolStripMenuItem.Name = "finiteToolStripMenuItem";
+			this.finiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.finiteToolStripMenuItem.Text = "Finite";
+			this.finiteToolStripMenuItem.Click += new System.EventHandler(this.finiteToolStripMenuItem_Click);
+			// 
+			// toroidalToolStripMenuItem
+			// 
+			this.toroidalToolStripMenuItem.Name = "toroidalToolStripMenuItem";
+			this.toroidalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.toroidalToolStripMenuItem.Text = "Toroidal";
+			this.toroidalToolStripMenuItem.Click += new System.EventHandler(this.toroidalToolStripMenuItem_Click);
+			// 
+			// UniverseType_StatusLabel
+			// 
+			this.UniverseType_StatusLabel.Name = "UniverseType_StatusLabel";
+			this.UniverseType_StatusLabel.Size = new System.Drawing.Size(123, 17);
+			this.UniverseType_StatusLabel.Text = "Universe Type = Finite";
 			// 
 			// Form1
 			// 
@@ -446,7 +484,11 @@
 		private System.Windows.Forms.ToolStrip toolStrip1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripButton StatusStripView;
-		private System.Windows.Forms.ToolStripButton toolStripButton1;
+		private System.Windows.Forms.ToolStripButton viewHUDbutton;
+		private System.Windows.Forms.ToolStripSplitButton UniverseType;
+		private System.Windows.Forms.ToolStripMenuItem finiteToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toroidalToolStripMenuItem;
+		private System.Windows.Forms.ToolStripStatusLabel UniverseType_StatusLabel;
 	}
 }
 

@@ -12,10 +12,10 @@ using System.IO;
 namespace Tavares_Caio_GOL
 {
 	public partial class Form1 : Form
-	{ 
+	{
 		// The universe array
-		bool[,] universe = new bool[75, 75];
-		bool[,] scratch = new bool[75, 75];
+		bool[,] universe = new bool[10, 10];
+		bool[,] scratch = new bool[10, 10];
 
 		//modal dialog data
 		decimal NumericUpDownSeed = 0;
@@ -30,6 +30,9 @@ namespace Tavares_Caio_GOL
 		// Generation count
 		int generations = 0;
 
+		bool showHUD = false;
+		bool InfiniteUniverse = true; // false = FINITE, true = toroidal
+		
 		public Form1()
 		{
 			InitializeComponent();
@@ -151,18 +154,26 @@ namespace Tavares_Caio_GOL
 				}
 			}
 
-			string HUD_Text = "\tGenerations = " + generations + "\n" + "\tLiving Cells = " + (CellCounter()).ToString() + "\n" + "\tBoundary Type = finite\n" + "\tUniverse Size = " + (universe.GetLength(0)) + ", " + (universe.GetLength(1));
-			Rectangle HUDRect = Rectangle.Empty;
-			HUDRect.X = 5;
-			HUDRect.Y = 5;
-			HUDRect.Width = 200;
-			HUDRect.Height = 100;
-			
-			Font f = new Font("Arial", 12f, FontStyle.Bold);
-			StringFormat SF = new StringFormat();
-			SF.Alignment = StringAlignment.Center;
-			SF.LineAlignment = StringAlignment.Center;
-			e.Graphics.DrawString(HUD_Text, f, Brushes.Red, HUDRect, SF);
+			// draw HUD
+			if (showHUD == true)
+			{
+				string HUD_Text = "\tGenerations = " + generations + "\n"
+							+ "\tLiving Cells = " + (CellCounter()).ToString() + "\n"
+							+ "\tBoundary Type = finite" + "\n"
+							+ "\tUniverse Size = " + (universe.GetLength(0)) + ", " + (universe.GetLength(1));
+
+				Rectangle HUDRect = Rectangle.Empty;
+				HUDRect.X = 5;
+				HUDRect.Y = 5;
+				HUDRect.Width = 200;
+				HUDRect.Height = 100;
+
+				Font f = new Font("Arial", 12f, FontStyle.Bold);
+				StringFormat SF = new StringFormat();
+				SF.Alignment = StringAlignment.Center;
+				SF.LineAlignment = StringAlignment.Center;
+				e.Graphics.DrawString(HUD_Text, f, Brushes.Red, HUDRect, SF);
+			}
 
 			// Cleaning up pens and brushes
 			gridPen.Dispose();
@@ -171,7 +182,7 @@ namespace Tavares_Caio_GOL
 
 		private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
 		{
-			
+
 			// If the left mouse button was clicked
 			if (e.Button == MouseButtons.Left)
 			{
@@ -200,26 +211,125 @@ namespace Tavares_Caio_GOL
 			int count = 0;
 			// get 'home' position, check for neighbors
 
-			for (int _x = x - 1; _x <= (x + 1); ++_x)
+			if (InfiniteUniverse == false) // FINITE
 			{
-				for (int _y = y - 1; _y <= (y + 1); ++_y)
+				for (int _x = x - 1; _x <= (x + 1); ++_x)
 				{
-					// if it is out of bounds, continue
-					if (_x < 0 || _y < 0 || _x > universe.GetLength(0)-1 || _y > universe.GetLength(1)-1)
-						continue;
-					//if it is the 'home' cell, continue
-					else if (_x == x && _y == y)
-						continue;
-					if ((_x >= 0 && _y >= 0) && (x < universe.GetLength(0)-1 && _y < universe.GetLength(1)-1))
+					for (int _y = y - 1; _y <= (y + 1); ++_y)
 					{
-						// if it is a live cell, add count
-						if (universe[_x, _y] == true)
-							++count;
+
+						// if it is out of bounds, continue
+						if (_x < 0 || _y < 0 || _x > universe.GetLength(0) - 1 || _y > universe.GetLength(1) - 1)
+							continue;
+						//if it is the 'home' cell, continue
+						else if (_x == x && _y == y)
+							continue;
+						if ((_x >= 0 && _y >= 0) && (x < universe.GetLength(0) - 1 && _y < universe.GetLength(1) - 1))
+						{
+							// if it is a live cell, add count
+							if (universe[_x, _y] == true)
+								++count;
+						}
+
+					}
+				}
+			}
+			else // TOROIDAL
+			{
+				for (int _x = x - 1; _x <= (x + 1); ++_x)
+				{
+					for (int _y = y - 1; _y <= (y + 1); ++_y)
+					{
+						int temp_X = _x;
+						int temp_Y = _y;
+						// if it is out of bounds, continue
+						if (temp_X < 0 || temp_Y < 0 || temp_X >= universe.GetLength(0) || temp_Y >= universe.GetLength(1))
+						{
+							if (temp_X < 0) // left side border - push to right side
+							{
+								temp_X = universe.GetLength(0) - 1;
+							}
+							else if (temp_X >= universe.GetLength(0)) // right border - push to left side
+							{
+								temp_X = 0;
+							}
+
+							if (temp_Y < 0) // top border - push to bottom
+							{
+								temp_Y = universe.GetLength(1) - 1;
+							}
+							else if (temp_Y >= universe.GetLength(1)) // bottom border - push to top side
+							{
+								temp_Y = 0;
+							}
+
+						}
+						//if it is the 'home' cell, continue
+						if (temp_X == x && temp_Y == y)
+							continue;
+
+						if ((temp_X >= 0 && temp_Y >= 0) && (temp_X < universe.GetLength(0) && temp_Y < universe.GetLength(1)))
+						{
+							// if it is a live cell, add count
+							if (universe[temp_X, temp_Y] == true)
+								++count;
+						}
+
 					}
 				}
 			}
 			return count;
 		}
+
+		//private int countNeighborToroidal(int x, int y) // remember to change name back to Toroidal
+		//{
+		//	int count = 0;
+		//	// get 'home' position, check for neighbors
+
+		//	for (int _x = x - 1; _x <= (x + 1); ++_x)
+		//	{
+		//		for (int _y = y - 1; _y <= (y + 1); ++_y)
+		//		{
+		//			int temp_X = _x;
+		//			int temp_Y = _y;
+		//			// if it is out of bounds, continue
+		//			if (temp_X < 0 || temp_Y < 0 || temp_X >= universe.GetLength(0) || temp_Y >= universe.GetLength(1))
+		//			{
+		//				if (temp_X < 0) // left side border - push to right side
+		//				{
+		//					temp_X = universe.GetLength(0) - 1;
+		//				}
+		//				else if (temp_X >= universe.GetLength(0)) // right border - push to left side
+		//				{
+		//					temp_X = 0;
+		//				}
+
+		//				if (temp_Y < 0) // top border - push to bottom
+		//				{
+		//					temp_Y = universe.GetLength(1) - 1;
+		//				}
+		//				else if (temp_Y >= universe.GetLength(1)) // bottom border - push to top side
+		//				{
+		//					temp_Y = 0;
+		//				}
+
+		//			}
+		//			//if it is the 'home' cell, continue
+		//			if (temp_X == x && temp_Y == y)
+		//				continue;
+
+		//			if ((temp_X >= 0 && temp_Y >= 0) && (temp_X < universe.GetLength(0) && temp_Y < universe.GetLength(1)))
+		//			{
+		//				// if it is a live cell, add count
+		//				if (universe[temp_X, temp_Y] == true)
+		//					++count;
+		//			}
+
+		//		}
+		//	}
+		//	return count;
+		//}
+
 
 		private void PlayButton_Click(object sender, EventArgs e)
 		{
@@ -301,7 +411,7 @@ namespace Tavares_Caio_GOL
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SaveFileDialog dlg = new SaveFileDialog();
-			
+
 			dlg.FileName = "myGOL";
 			dlg.Filter = "All Files|*.*|Cells|*.cells";
 			dlg.FilterIndex = 2; dlg.DefaultExt = "cells";
@@ -322,16 +432,16 @@ namespace Tavares_Caio_GOL
 
 				// Iterate through the universe one row at a time.
 				for (int y = 0; y < universe.GetLength(1); y++)
-     {
+				{
 					// Create a string to represent the current row.
 					String currentRow = string.Empty;
 
 					// Iterate through the current row one cell at a time.
 					for (int x = 0; x < universe.GetLength(0); x++)
-          {
+					{
 						// If the universe[x,y] is alive then append 'O' (capital O)
 						// to the row string.
-						if (universe[x,y] == true)
+						if (universe[x, y] == true)
 						{
 							currentRow += "O";
 						}
@@ -541,16 +651,20 @@ namespace Tavares_Caio_GOL
 
 		private void toolStripButton1_Click(object sender, EventArgs e)
 		{
-			//HUD.Visible = !HUD.Visible;
+			showHUD = !showHUD;
+			graphicsPanel1.Invalidate();
 		}
 
-		//private void HUD_VisibleChanged(object sender, EventArgs e)
-		//{
-		//	HUD.Text = "Generations = " + generations + "\n" + "Living Cells = " + (CellCounter()).ToString() + "\n" + "Boundary Type = " + "Torodial\n" + "Universe Size = " + (universe.GetLength(0)) + ", " + (universe.GetLength(1));
-			
-		//	HUD.ForeColor = Color.Red;
-		//}
+		private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			InfiniteUniverse = false;
+			UniverseType_StatusLabel.Text = "Universe Type = Finite";
+		}
 
-
+		private void toroidalToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			InfiniteUniverse = true;
+			UniverseType_StatusLabel.Text = "Universe Type = Toroidal";
+		}
 	}
 }
